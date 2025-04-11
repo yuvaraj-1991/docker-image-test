@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Running the Docker mvn-tomcat container') {
             steps {
-                sh 'sudo docker run -d --name mvn-tomcat-deploy -p 8080:8080 maven-tomcat-test:v1'
+                sh 'sudo docker stop mvn-tomcat-deploy || true'
+                sh 'sudo docker rm mvn-tomcat-deploy || true'
+                sh 'sudo docker run -d --name mvn-tomcat-deploy -p 8080:8080 yuv1991/maven-tomcat-test:v1'
             }
         }
     }
